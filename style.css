@@ -1,0 +1,115 @@
+		* {
+		   margin: 0;
+		   padding: 0;
+		   box-sizing: border-box;
+		   font-family: georgia;
+		}
+
+		.clac {
+		   width: clamp(330px, 90vw, 500px);
+		   height: 450px;
+		   margin: 100px auto;
+		   padding: 5px;
+		   background: #1c2137;
+		   border: 1px solid #abc;
+		   border-radius: 10px;
+		}
+
+		.display-box {
+		   width: auto;
+		   height: 25%;
+		   margin: 5px;
+		   padding: 2px;
+		   background: #fffcf3;
+		   border-radius: 5px;
+		}
+
+		.display {
+		   width: 100%;
+		   height: 60%;
+		   font-size: 3rem;
+		   color: #192a56;
+		   background: transparent;
+		   border: none;
+		   outline: none;
+		   padding-inline: 2px;
+		   text-align: right;
+		   transition: all .8s;
+		}
+		.autoResult {
+		   width: 100%;
+		   height: 40%;
+		   font-size: 1.5rem;
+		   color: gray;
+		   background: transparent;
+		   border: none;
+		   outline: none;
+		   padding-inline: 2px;
+		   text-align: right;
+		   transition: all .5s;
+		}
+		.btns {
+		   width: 100%;
+		   height: 75%;
+		   padding-bottom: 5px;
+		   display: flex;
+		   flex-wrap: wrap;
+		   justify-content: space-around;
+		   align-items: center;
+		}
+
+		.btn {
+		   width: 22%;
+		   height: 15%;
+		   background: #ddd;
+		   border: none;
+		   border-radius: 5px;
+		   font-size: 1.5rem;
+		   transition: all 0.1s ease-out;
+		}
+
+		.btn:hover {
+		   box-shadow: inset 3px 3px 8px #899,
+		      inset -3px -3px 8px #899;
+		   font-size: 1.6rem;
+		}
+
+		.equal {
+		   width: 47%;
+		   color: #3c3;
+		   font-size: 2.3rem;
+		}
+
+		.equal:hover {
+		   background: #396;
+		   box-shadow: none;
+		   font-size: 2.5rem;
+		}
+
+		.back {
+		   color: #3cf;
+		   font-size: 2rem;
+		}
+
+		.back:hover {
+		   background: #678;
+		   box-shadow: none;
+		   font-size: 2.2rem;
+		}
+
+		.operator {
+		   color: #3cc;
+		   font-size: 2rem;
+		}
+   .operator:hover {
+		   font-size: 2.2rem;
+		}
+		.clear {
+		   color: #f03;
+		}
+
+		.clear:hover {
+		   background: #903;
+		   box-shadow: none;
+		}
+		
