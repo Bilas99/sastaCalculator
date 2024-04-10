@@ -2,18 +2,29 @@
 <html lang="en">
 <head>
    <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
    <!-- link style.css -->
    <link rel="stylesheet" href="style.css" />
    <title> A simple Calculator || Create using HTML, CSS, JavaScript, mathjs </title>
-   <!-- link mathjs cdn script -->
-   <script src="https://unpkg.com/mathjs@12.4.1/lib/browser/math.js"></script>
-</head>
+   </head>
 <body>
+   <div class="header">
+      <h1> Sasta Calculator </h1>
+      <p> 
+         It's a
+         <span>
+            Sasta Calculator
+         </span> but not a 
+         <span>
+            SimpleCalculator
+         </span>
+      </p>
+   </div>
    <div class="clac">
 		   <!-- display box -->
 		   <div class="display-box">
 		      <input class="display" value="0" readonly/>
-		      <input class="autoResult" readonly/>
+		      <input class="auto_calculate" readonly/>
 		   </div>
 		   <!-- btns starts -->
 		   <div class="btns" >
@@ -39,6 +50,9 @@
       </div>
       <!-- btns ends -->
    </div>
+   <!-- link mathjs cdn script -->
+   <script src="https://unpkg.com/mathjs@12.4.1/lib/browser/math.js"></script>
+   
    <!-- link script.js file -->
    <script src="script.js"></script>
 

@@ -1,26 +1,26 @@
 const display = document.querySelector('.display');
-const runtimeResult = document.querySelector('.autoResult');
+const autoCalculate = document.querySelector('.auto_calculate');
 const btns = document.querySelectorAll('.btn');
     
 		let previousKeyType = null;
 		let isFloatingPoint = false;
 		
 		const updateDisplay = (num) => {
-		   //if num and display value '0'
-		   //return same like 0
+		   //if num and display value `0`
+		   //return same like `0`
 		   if (num === '0' && 
 		       display.value === '0' ||
 		       num === '00' && 
 		       display.value === '0')
 		       return;
-		   
-		   //if num '.' and isFloatingPoint
-		   //return same like 7.7×7.
+		  
+		   //if num `.` and isFloatingPoint
+		   //return same like `7.7×7.`
 		   if (num === '.' &&
 		       isFloatingPoint) 
 		       return;
 		   
-		   //if num '.' and display vlaue '0' 
+		   //if num `.` and display vlaue `0`
 		   if (num === '.' && 
 		       display.value === '0') {
 		          display.value = '0.';
@@ -28,7 +28,7 @@ const btns = document.querySelectorAll('.btn');
 		          previousKeyType = 'number'
 		          return;
 		      }
-		   //if num '.' and !isFloatingPoint
+		   //if num `.` and !isFloatingPoint
 		   //and previousKeyType !operator
 		   if (num === '.' && 
 		       !isFloatingPoint &&
@@ -38,7 +38,7 @@ const btns = document.querySelectorAll('.btn');
 		          previousKeyType = 'number'
 		          return;
 		      }
-		    //if num '.' and !isFloatingPoint
+		    //if num `.` and !isFloatingPoint
 		    //and previousKeyType operator
 		    if(num === '.' &&
 		       !isFloatingPoint &&
@@ -60,13 +60,14 @@ const btns = document.querySelectorAll('.btn');
 		};
 		
 		const handleMinusOperatorClick = (operator, val, lastVal) => {
-		   
+		   //if last value `×` or `÷`
 		   if(lastVal == '×' ||
 		      lastVal == '÷') {
 		      display.value += operator;
 		      previousKeyType = 'operator'
 		      return;
 		   }
+		   //if display value !0 and last value `+` or `-`
 		   if (display.value !== '0' &&
 		      lastVal == '+' ||
 		      lastVal == '-') {
@@ -79,7 +80,6 @@ const btns = document.querySelectorAll('.btn');
 		   if (display.value === '0') {
 		       display.value = operator;
 		       previousKeyType = 'operator'
-		       console.log('yesss')
 		       return;
 		   }
 		}
@@ -120,7 +120,7 @@ const btns = document.querySelectorAll('.btn');
 		
 		const handleClearClick = () => {
 		   display.value = '0';
-		   runtimeResult.value = '';
+		   autoCalculate.value = '';
 		   previousKeyType = null;
 		   isFloatingPoint = false;
 		};
@@ -162,57 +162,61 @@ const btns = document.querySelectorAll('.btn');
 	}
    const autoResult = () => {
       let val = display.value;
-         if (previousKeyType === 'operator') {
-            val += 0;
-         }
-          val = val.replace(/×|÷/g, (match) => {
-             if (match === '×') {
-                return '*';
-             } else {
-                return '/';
-             };
-          });
-      let res = math.evaluate(val)
-      if (display.value == res ||
-          res == '') {
-         runtimeResult.value = '';
+      if (previousKeyType === 'operator') {
+         val += 0;
+      }
+      val = val.replace(/×|÷/g, (match) => {
+          if (match === '×') {
+             return '*';
+          } else {
+             return '/';
+          };
+      });
+      
+      let result = math.evaluate(val)
+      
+      if (result == display.value) {
+         autoCalculate.value = '';
       } else {
-         runtimeResult.value = res;
+         autoCalculate.value = result;
       }
    }
    
    const handleEqualClick = () => {
+      if (autoCalculate.value !== '') {
+         
       display.value = '';
-      runtimeResult.style.transform = 'translateY(-54px)';
-      runtimeResult.style.fontSize = '3rem';
+      autoCalculate.style.transform = 'translateY(-54px)';
+      autoCalculate.style.fontSize = '3rem';
         
       setTimeout(() =>  {
-         display.value = runtimeResult.value;
-         runtimeResult.value = '';
-         runtimeResult.style.transform = 'translateY(0px)';
-         runtimeResult.style.fontSize = '1.5rem';
+         display.value = autoCalculate.value;
+         autoCalculate.value = '';
+         autoCalculate.style.transform = 'translateY(0px)';
+         autoCalculate.style.fontSize = '1.5rem';
       }, 500)
+      }
    }
 		btns.forEach((btn) => {
 		   btn.addEventListener('click', (e) => {
 		   const val = e.target.value;
 		   
 		   if (val === 'C') {
-		      handleClearClick(); // Line allmost [69]
+		      handleClearClick(); // Line num almost [121]
 		   } else if (val === '←') {
-		      handleBackClick(); //Line allmost [75]
-		      autoResult();
+		      handleBackClick(); //Line num almost [128]
+		      autoResult(); //Line num almost [163]
 		   } else if(val === '+' ||
 		             val === '-' ||
 		             val === '×' ||
 		             val === '÷') {
 		      isFloatingPoint = false;
-		      handleOperatorClick(val);
+		      handleOperatorClick(val); //Line num almost [87]
 		   } else if (val === '=') {
-		      handleEqualClick(); // Line allmost [99]
+		      handleEqualClick(); // Line num almost [184]
 		   } else {
-		      updateDisplay(val); // Line allmost [07]
-		      autoResult()
+		      updateDisplay(val); // Line almost [07]
+		      autoResult() //Line num almost [163]
 		   }
 		   });
 		});
