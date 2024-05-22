@@ -162,20 +162,23 @@ const btns = document.querySelectorAll('.btn');
 	}
    const autoResult = () => {
       let val = display.value;
+      let result ;
       if (previousKeyType === 'operator') {
-         val += 0;
-      }
-      val = val.replace(/×|÷/g, (match) => {
-          if (match === '×') {
-             return '*';
-          } else {
-             return '/';
-          };
+         result = '';
+      }else {
+         val = val.replace(/×|÷/g, (match) => {
+            if (match === '×') {
+                return '*';
+            } else {
+               return '/';
+            };
       });
       
-      let result = math.evaluate(val)
-      
-      if (result == display.value) {
+         result = math.evaluate(val);
+      }
+      if (result == display.value ||
+         result == 'Infinity'
+        ) {
          autoCalculate.value = '';
       } else {
          autoCalculate.value = result;
@@ -183,19 +186,50 @@ const btns = document.querySelectorAll('.btn');
    }
    
    const handleEqualClick = () => {
+      const isResultLength = autoCalculate.value.length;
+      const len = display.value.length;
+		      
+		      if (len <= 10) {
+		         display.style.fontSize = '3rem';
+		      } else if(len > 10 && len <= 13) {
+		         display.style.fontSize = '2.3rem';
+		      } else if(len > 13) {
+		         display.style.fontSize = '1.8rem';
+		      }
       if (autoCalculate.value !== '') {
          
-      display.value = '';
-      autoCalculate.style.transform = 'translateY(-54px)';
-      autoCalculate.style.fontSize = '3rem';
-        
-      setTimeout(() =>  {
-         display.value = autoCalculate.value;
-         autoCalculate.value = '';
-         autoCalculate.style.transform = 'translateY(0px)';
-         autoCalculate.style.fontSize = '1.5rem';
-      }, 500)
+         display.value = '';
+         
+         autoCalculate.style.transform = 'translateY(-54px)';
+         
+         if (isResultLength <= 10 ) {
+		         autoCalculate.style.fontSize = '3rem';
+		         display.style.fontSize = '3rem';
+		      } else if(isResultLength > 10 && isResultLength <= 13) {
+		         autoCalculate.style.fontSize = '2.3rem';
+		         display.style.fontSize = '2.3rem';
+		      } else if(isResultLength > 13) {
+		         autoCalculate.style.fontSize = '1.8rem';
+		         display.style.fontSize = '1.8rem';
+		      }
+		        
+         setTimeout(() =>  {
+            display.value = autoCalculate.value;
+            const len = display.value.length;
+		      
+		      if (len <= 10) {
+		         display.style.fontSize = '3rem';
+		      } else if(len > 10 && len <= 13) {
+		         display.style.fontSize = '2.3rem';
+		      } else if(len > 13) {
+		         display.style.fontSize = '1.8rem';
+		      }
+            autoCalculate.value = '';
+            autoCalculate.style.transform = 'translateY(0px)';
+            autoCalculate.style.fontSize = '1.5rem';
+         }, 500)
       }
+      
    }
 		btns.forEach((btn) => {
 		   btn.addEventListener('click', (e) => {
@@ -221,3 +255,16 @@ const btns = document.querySelectorAll('.btn');
 		   });
 		});
 		
+		btns.forEach((btn) => {
+		   btn.addEventListener('click', () => {
+		      const len = display.value.length;
+		      
+		      if (len <= 10) {
+		         display.style.fontSize = '3rem';
+		      } else if(len > 10 && len <= 13) {
+		         display.style.fontSize = '2.3rem';
+		      } else if(len > 13) {
+		         display.style.fontSize = '1.8rem';
+		      }
+		   })
+		})
